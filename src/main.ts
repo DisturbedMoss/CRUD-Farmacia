@@ -1,9 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const config = new DocumentBuilder()
+    .setTitle('Farma Center')
+    .setDescription('Projeto Farma Center')
+    .setContact(
+      'Vitor Hugo',
+      'https://github.com/disturbedmoss',
+      'dasilvavitorhugo713@gmail.com',
+    )
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('/swagger', app, document);
 
   process.env.TZ = '-03:00';
 
