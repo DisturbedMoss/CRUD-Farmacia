@@ -12,7 +12,9 @@ import {
   Body,
 } from '@nestjs/common';
 import { Produto } from '../entities/produto.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Produto')
 @Controller('/produtos')
 export class ProdutoController {
   constructor(private readonly produtoService: ProdutoService) {}
